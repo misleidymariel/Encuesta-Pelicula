@@ -34,15 +34,13 @@ bower_components
 # configuración de nodo-waf
 .lock-wscript
 
-# Complementos binarios compilados (https://nodejs.org/api/addons.html)
-construir / liberar
 
 # Directorios de dependencias
-node_modules /
-jspm_packages /
+node_modules/
+jspm_packages/
 
 # Directorio de dependencias de Snowpack (https://snowpack.dev/)
-web_modules /
+web_modules/
 
 # Caché de TypeScript
 * .tsbuildinfo
@@ -53,11 +51,6 @@ web_modules /
 # Opcional eslint cache
 .eslintcache
 
-# Caché de microbundle
-.rpt2_cache /
-.rts2_cache_cjs /
-.rts2_cache_es /
-.rts2_cache_umd /
 
 # Historial de REPL opcional
 .node_repl_history
@@ -76,52 +69,23 @@ web_modules /
 .cache
 .parcel-cache
 
-# Next.js salida de compilación
-.siguiente
 
 # Nuxt.js construir / generar salida
 .nuxt
 dist
 
 # Archivos Gatsby
-.cache /
+.cache/
 # Comente en la línea pública si su proyecto usa Gatsby y no Next.js
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
-# salida de compilación vuepress
-.vuepress / dist
-
-# Directorios sin servidor
-.serverless /
-
-# FuseBox cache
-.fusebox /
-
-# DynamoDB Archivos locales
-.dynamodb /
-
-# TernJS port file
-.tern-port
 
 # Almacena las versiones de VSCode utilizadas para probar las extensiones de VSCode
 .vscode-test
 
 # hilo v2
 
-.yarn / caché
-.yarn / desconectado
-.yarn / build-state.yml
-.pnp. * *
-© 2020 GitHub, Inc.
-Condiciones
-Intimidad
-Seguridad
-Estado
-Ayuda
-Póngase en contacto con GitHub
-Precios
-API
-Formación
-Blog
-Acerca de
+.yarn/caché
+.yarn/desconectado
+.yarn/build-state.yml
