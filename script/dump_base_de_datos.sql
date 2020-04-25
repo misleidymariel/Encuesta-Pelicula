@@ -112,3 +112,10 @@ CREATE TABLE `competencia` (
 LOCK TABLES `competencia` WRITE;
 INSERT INTO `competencia` VALUES (1,'¿Cuál es la mejor comedia?'),(2, '¿Cuál es el peor drama?'),(3, '¿Cuál es la mejor pelicula?'),(4, '¿Cuál es la pelicula de terror que mas te gusto?'),(5, '¿Cuál es la mejor pelicula con  Di Caprio?'),(6, '¿Cuál es la mejor pelicula con Sandra Bulllock?');
 UNLOCK TABLES;
+
+
+CREATE TABLE `votos` (
+  `id_pelicula` int(11) ,
+  `id_competencia` int(10) ,
+  
+); 
