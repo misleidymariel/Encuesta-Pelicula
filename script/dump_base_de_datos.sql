@@ -5,7 +5,7 @@ USE `competencias`;
 DROP TABLE IF EXISTS `actor`;
 
 CREATE TABLE `actor` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(70) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -19,7 +19,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `genero`;
 
 CREATE TABLE `genero` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -31,11 +31,11 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `pelicula`;
 
 CREATE TABLE `pelicula` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `titulo` varchar(300) DEFAULT '',
   `anio` decimal(5,0) DEFAULT NULL,
   `duracion` decimal(5,0) DEFAULT NULL,
-  `genero_id` int(11) unsigned DEFAULT NULL,
+  `genero_id` INT unsigned DEFAULT NULL,
   `director` varchar(400) DEFAULT '',
   `fecha_lanzamiento` date DEFAULT NULL,
   `puntuacion` decimal(2,0) DEFAULT NULL,
@@ -55,9 +55,9 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `actor_pelicula`;
 
 CREATE TABLE `actor_pelicula` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `actor_id` int(11) unsigned NOT NULL,
-  `pelicula_id` int(11) unsigned NOT NULL,
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
+  `actor_id` INT unsigned NOT NULL,
+  `pelicula_id` INT unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ap_actor_id` (`actor_id`),
   KEY `ap_pelicula_id` (`pelicula_id`),
@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `director`;
 CREATE TABLE `director` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(70) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`)
@@ -83,9 +83,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `director_pelicula`;
 CREATE TABLE `director_pelicula` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `director_id` int(11) unsigned NOT NULL,
-  `pelicula_id` int(11) unsigned NOT NULL,
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
+  `director_id` INT unsigned NOT NULL,
+  `pelicula_id` INT unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `director_id_2` (`director_id`,`pelicula_id`),
   KEY `director_id` (`director_id`),
@@ -102,20 +102,30 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `competencia`;
 
 CREATE TABLE `competencia` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` varchar(45) NOT NULL DEFAULT 'Habilitado',
+  `genero_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unicoValor` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 
 LOCK TABLES `competencia` WRITE;
-INSERT INTO `competencia` VALUES (1,'¿Cuál es la mejor comedia?'),(2, '¿Cuál es el peor drama?'),(3, '¿Cuál es la mejor pelicula?'),(4, '¿Cuál es la pelicula de terror que mas te gusto?'),(5, '¿Cuál es la mejor pelicula con  Di Caprio?'),(6, '¿Cuál es la mejor pelicula con Sandra Bulllock?');
+INSERT INTO `competencia` VALUES (, '¿Cuál es la mejor comedia?'),(, '¿Cuál es el peor drama?'),(, '¿Cuál es la mejor pelicula?'),(, '¿Cuál es la pelicula de terror que mas te gusto?'),(, '¿Cuál es la mejor pelicula con  Di Caprio?'),(, '¿Cuál es la mejor pelicula con Sandra Bulllock?');
 UNLOCK TABLES;
 
-
+DROP TABLE IF EXISTS `votos`;
 CREATE TABLE `votos` (
-  `id_pelicula` int(11) ,
-  `id_competencia` int(10) ,
-  
-); 
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
+  `pelicula_id` INT unsigned NOT NULL,
+  `competencia_id` INT unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `pelicula_id` FOREIGN KEY (`pelicula_id`) REFERENCES `pelicula` (`id`),
+  CONSTRAINT `competencia_id` FOREIGN KEY (`competencia_id`) REFERENCES `competencia` (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `votos`(pelicula_id, competencia_id) VALUES (?, ?);
+
+UNLOCK TABLES;

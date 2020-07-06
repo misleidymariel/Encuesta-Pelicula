@@ -4,6 +4,6 @@ var config = {
     user     : 'pelis',
     password : 'Control123',
     database : 'competencias'
-  }
+}
 
-  module.exports = config
+module.exports = config
