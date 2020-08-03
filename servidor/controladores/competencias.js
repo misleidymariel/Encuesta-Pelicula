@@ -49,9 +49,9 @@ function getTwoMovies(filters) {
 function crearCompetencia (req, res) {
     
     let nombre = req.body.nombre;
-    let genero = req.body.genero;
-    let director = req.body.director;
-    let actor = req.body.actor;
+    let genero = req.body.genero === "0" ? undefined : req.body.genero;
+    let director = req.body.director === "0" ? undefined: req.body.director;
+    let actor = req.body.actor === "0" ? undefined:req.body.actor;
 
     let queryActualiza = 'UPDATE competencia SET status = ? WHERE nombre = ? AND status = ?'
     let query = "INSERT INTO `competencia` (nombre, genero_id, director_id ,actor_id) VALUES ( ?, ? , ?, ?)"
@@ -61,7 +61,7 @@ function crearCompetencia (req, res) {
     searchPromise.then( movies => {
         if (movies.length < 2) {
             return new Promise(( resolve, reject ) => {
-                reject("No se puede crear la competencia");
+                reject({code: 'ER_NOT_ENOUGH_MOVIES', message: "No se tiene peliculas suficientes para los filtros seleccionados"});
             });
         }
 
@@ -78,12 +78,18 @@ function crearCompetencia (req, res) {
     }).then(rows => {
         res.status(201).send(nombre);
     }).catch(error => {
+        logger.error(error);
         if (error.code == 'ER_DUP_ENTRY') {
             res.status(422).send("La competencia ya existe");
-            return
+            return;
+        }
+
+        if (error.code == 'ER_NOT_ENOUGH_MOVIES') {
+            res.status(422).send(error.message);
+            return;
         }
         
-        res.status(400).send(error);
+        res.status(422).send("Internal Server Error");
     })
 }
 

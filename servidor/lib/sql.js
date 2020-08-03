@@ -7,8 +7,7 @@ class SqlUtil {
      */
     static buildWhereClause(args, operator) {
 
-        var clause = [] // []
-        console.log("arg size", clause.length);
+        var clause = [] //
         args.forEach(arg => {
             if(arg.value) {
                 var cond = arg.columnName + ' ' + arg.operator + ' ' + arg.value;
